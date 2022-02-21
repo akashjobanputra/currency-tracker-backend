@@ -2,6 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { pick } from 'lodash';
 import { lastValueFrom } from 'rxjs';
+import { Country } from './entities/country.entity';
 
 @Injectable()
 export class CountriesAPIService {
@@ -17,7 +18,7 @@ export class CountriesAPIService {
     return this.pickKeys(result?.data);
   }
 
-  private pickKeys(countries: any[]): any[] | null {
+  private pickKeys(countries: Country[]): Country[] | null {
     if (!countries) {
       return null;
     }
@@ -27,7 +28,7 @@ export class CountriesAPIService {
         'name.common',
         'name.official',
         'population',
-      ]);
+      ]) as Country;
       trimmedCountry['currencies'] = [];
       for (const currency in country.currencies) {
         trimmedCountry['currencies'].push({

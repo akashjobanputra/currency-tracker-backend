@@ -1,4 +1,5 @@
 import { ObjectType, Field } from '@nestjs/graphql';
+import { Currency } from '../../currencies/entities/currency.entity';
 
 @ObjectType()
 class CountryName {
@@ -8,19 +9,6 @@ class CountryName {
   @Field()
   official: string;
 }
-
-@ObjectType()
-class Currency {
-  @Field()
-  abbr: string;
-
-  @Field()
-  name: string;
-
-  @Field()
-  symbol: string;
-}
-
 @ObjectType()
 export class Country {
   @Field(() => CountryName)

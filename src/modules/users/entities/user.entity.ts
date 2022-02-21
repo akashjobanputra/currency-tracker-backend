@@ -1,4 +1,5 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Country } from '../../countries/entities/country.entity';
 
 @ObjectType()
 export class User {
@@ -9,4 +10,7 @@ export class User {
   username: string;
 
   password: string;
+
+  @Field(() => [Country])
+  watchList?: Country[];
 }

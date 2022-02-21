@@ -6,6 +6,7 @@ import { configService } from './config/config.service';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { CountriesModule } from './modules/countries/countries.module';
+import { CurrenciesModule } from './modules/currencies/currencies.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CountriesModule } from './modules/countries/countries.module';
     UsersModule,
     AuthModule,
     CountriesModule,
+    CurrenciesModule,
   ],
 })
 export class AppModule {}

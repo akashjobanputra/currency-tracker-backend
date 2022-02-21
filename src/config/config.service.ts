@@ -73,11 +73,16 @@ class ConfigService {
   get jwtSecret() {
     return this.getValue('JWT_SECRET');
   }
+
+  get fixerAccessKey() {
+    return this.getValue('FIXER_ACCESS_KEY');
+  }
 }
 
 const configService = new ConfigService(process.env).ensureValues([
   'NODE_ENV',
   'JWT_SECRET',
+  'FIXER_ACCESS_KEY',
 ]);
 
 export { configService };

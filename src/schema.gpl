@@ -15,6 +15,7 @@ type CountryName {
 
 type Currency {
   abbr: String!
+  exchangeRate: Float!
   name: String!
   symbol: String!
 }
@@ -31,6 +32,7 @@ type LoginResponseDto {
 
 type Mutation {
   login(loginUserInput: LoginInputDto!): LoginResponseDto!
+  mapCountryToUser(countryCode: String!): User!
   signUp(signUpInput: LoginInputDto!): User!
 }
 
@@ -43,4 +45,5 @@ type Query {
 type User {
   id: Int!
   username: String!
+  watchList: [Country!]!
 }

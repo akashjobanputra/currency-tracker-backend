@@ -1,4 +1,4 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation, Context } from '@nestjs/graphql';
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { UseGuards } from '@nestjs/common';
@@ -22,5 +22,15 @@ export class UsersResolver {
   @Query(() => User, { name: 'user' })
   findOne(@Args('username', { type: () => String }) id: string) {
     return this.usersService.findOne(id);
+  }
+
+  @Mutation(() => User)
+  @UseGuards(JwtAuthGuard)
+  mapCountryToUser(
+    @Args('countryCode', { type: () => String }) countryCode: string,
+    @Context() context,
+  ) {
+    const { user } = context.req;
+    return this.usersService.addCountryToList(user.userId, countryCode);
   }
 }
