@@ -1,0 +1,46 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Country {
+  currencies: [Currency!]!
+  name: CountryName!
+  population: Float!
+}
+
+type CountryName {
+  common: String!
+  official: String!
+}
+
+type Currency {
+  abbr: String!
+  name: String!
+  symbol: String!
+}
+
+input LoginInputDto {
+  password: String!
+  username: String!
+}
+
+type LoginResponseDto {
+  access_token: String!
+  user: User!
+}
+
+type Mutation {
+  login(loginUserInput: LoginInputDto!): LoginResponseDto!
+  signUp(signUpInput: LoginInputDto!): User!
+}
+
+type Query {
+  countries(name: String): [Country!]!
+  user(username: String!): User!
+  users: [User!]!
+}
+
+type User {
+  id: Int!
+  username: String!
+}

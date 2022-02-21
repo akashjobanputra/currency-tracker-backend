@@ -1,0 +1,11 @@
+{
+  "search.exclude": {
+    "**/node_modules": true
+  },
+  "editor.tabSize": 2,
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+}
