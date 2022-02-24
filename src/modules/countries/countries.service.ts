@@ -25,7 +25,11 @@ export class CountriesService {
     this.countries.push(...allCountries);
   }
 
-  findAll(name: string) {
+  getAllCountries() {
+    return this.countries;
+  }
+
+  findByNameStart(name: string) {
     const matching = this.countries
       .filter((country) =>
         (country.name.common as string)

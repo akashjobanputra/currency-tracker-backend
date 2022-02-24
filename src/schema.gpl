@@ -15,9 +15,9 @@ type CountryName {
 
 type Currency {
   abbr: String!
-  exchangeRate: Float!
+  exchangeRate: Float
   name: String!
-  symbol: String!
+  symbol: String
 }
 
 input LoginInputDto {
@@ -37,7 +37,8 @@ type Mutation {
 }
 
 type Query {
-  countries(name: String): [Country!]!
+  allCountries: [Country!]!
+  searchCountries(searchText: String): [Country!]!
   user(username: String!): User!
   users: [User!]!
 }

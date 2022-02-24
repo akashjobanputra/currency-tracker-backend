@@ -8,11 +8,18 @@ import { Country } from './entities/country.entity';
 export class CountriesResolver {
   constructor(private readonly countriesService: CountriesService) {}
 
-  @Query(() => [Country], { name: 'countries' })
+  @Query(() => [Country], { name: 'searchCountries' })
   @UseGuards(JwtAuthGuard)
-  findAll(
-    @Args('name', { type: () => String, nullable: true }) countryName: string,
+  findByNameStart(
+    @Args('searchText', { type: () => String, nullable: true })
+    searchText: string,
   ) {
-    return this.countriesService.findAll(countryName);
+    return this.countriesService.findByNameStart(searchText);
+  }
+
+  @Query(() => [Country], { name: 'allCountries' })
+  @UseGuards(JwtAuthGuard)
+  findAll() {
+    return this.countriesService.getAllCountries();
   }
 }

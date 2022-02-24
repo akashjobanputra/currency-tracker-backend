@@ -8,9 +8,9 @@ export class Currency {
   @Field()
   name: string;
 
-  @Field()
-  symbol: string;
+  @Field({ nullable: true })
+  symbol?: string;
 
-  @Field(() => Float)
+  @Field(() => Float, { nullable: true })
   exchangeRate?: number;
 }
