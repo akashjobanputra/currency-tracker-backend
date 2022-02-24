@@ -11,6 +11,6 @@ export class User {
 
   password: string;
 
-  @Field(() => [Country])
+  @Field(() => [Country], { nullable: true })
   watchList?: Country[];
 }

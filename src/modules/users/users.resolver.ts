@@ -27,10 +27,18 @@ export class UsersResolver {
   @Mutation(() => User)
   @UseGuards(JwtAuthGuard)
   mapCountryToUser(
-    @Args('countryCode', { type: () => String }) countryCode: string,
+    @Args('countryCommonName', { type: () => String })
+    countryCommonName: string,
     @Context() context,
   ) {
     const { user } = context.req;
-    return this.usersService.addCountryToList(user.userId, countryCode);
+    return this.usersService.addCountryToList(user.userId, countryCommonName);
+  }
+
+  @Query(() => User, { name: 'userWatchList' })
+  @UseGuards(JwtAuthGuard)
+  getWatchList(@Context() context) {
+    const { user } = context.req;
+    return this.usersService.getUserWatchList(user.userId);
   }
 }

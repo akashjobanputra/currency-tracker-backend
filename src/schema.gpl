@@ -32,7 +32,7 @@ type LoginResponseDto {
 
 type Mutation {
   login(loginUserInput: LoginInputDto!): LoginResponseDto!
-  mapCountryToUser(countryCode: String!): User!
+  mapCountryToUser(countryCommonName: String!): User!
   signUp(signUpInput: LoginInputDto!): User!
 }
 
@@ -40,11 +40,12 @@ type Query {
   allCountries: [Country!]!
   searchCountries(searchText: String): [Country!]!
   user(username: String!): User!
+  userWatchList: User!
   users: [User!]!
 }
 
 type User {
   id: Int!
   username: String!
-  watchList: [Country!]!
+  watchList: [Country!]
 }

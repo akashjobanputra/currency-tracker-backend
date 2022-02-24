@@ -82,4 +82,14 @@ export class UsersService {
       ),
     };
   }
+
+  async getUserWatchList(id: number): Promise<UserResponse> {
+    const user = this.users.find((user) => user.id === id);
+    return {
+      ...user,
+      watchList: user.watchList.map((countryCode) =>
+        this.countryService.findByCountryCode(countryCode),
+      ),
+    };
+  }
 }
