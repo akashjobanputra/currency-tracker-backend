@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
@@ -18,6 +18,9 @@ export class AuthService {
       '🚀 ~ file: auth.service.ts ~ line 11 ~ AuthService ~ validateUser ~ user',
       user,
     );
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
 
     const validPassword = await bcrypt.compare(password, user?.password);
 
