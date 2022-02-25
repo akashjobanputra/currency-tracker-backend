@@ -20,17 +20,18 @@ type UserResponse = {
 
 @Injectable()
 export class UsersService {
+  // Sample users already created, for testing purposes; test password is 'password'
   private readonly users: User[] = [
     {
       id: 1,
       username: 'abc@yopmail.com',
-      password: '$2b$16$aMCxI4Hv17bwm3SYWdrX3u14MS7.MnI1iGinn3XnAt4A07JNvCHKm',
+      password: '$2b$16$WodYxvIK9K3lwAKLaQMRcuqZ.Qq5N63AooD7Iix05vUVFf7/ruIpi',
       watchList: [],
     },
     {
       id: 2,
       username: 'abc2@yopmail.com',
-      password: '$2b$16$aMCxI4Hv17bwm3SYWdrX3u14MS7.MnI1iGinn3XnAt4A07JNvCHKm',
+      password: '$2b$16$WodYxvIK9K3lwAKLaQMRcuqZ.Qq5N63AooD7Iix05vUVFf7/ruIpi',
       watchList: [],
     },
   ];
@@ -61,7 +62,7 @@ export class UsersService {
     countryCode: string,
   ): Promise<UserResponse> {
     const user = this.users.find((user) => user.id === id);
-    const country = this.countryService.findByCountryCode(countryCode);
+    const country = this.countryService.findByCountryCommonName(countryCode);
     if (!country) {
       throw new BadRequestException(`Invalid Country code: ${countryCode}`);
     }
@@ -78,7 +79,7 @@ export class UsersService {
     return {
       ...user,
       watchList: user.watchList.map((countryCode) =>
-        this.countryService.findByCountryCode(countryCode),
+        this.countryService.findByCountryCommonName(countryCode),
       ),
     };
   }
@@ -88,7 +89,7 @@ export class UsersService {
     return {
       ...user,
       watchList: user.watchList.map((countryCode) =>
-        this.countryService.findByCountryCode(countryCode),
+        this.countryService.findByCountryCommonName(countryCode),
       ),
     };
   }

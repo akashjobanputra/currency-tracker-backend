@@ -1,15 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CurrenciesService } from '../currencies/currencies.service';
 import { CountriesAPIService } from './countries-api.service';
-import { Country } from './entities/country.entity';
+import { CountriesRespository } from './countries.repository';
 
 @Injectable()
 export class CountriesService {
-  private readonly countries: Country[] = [];
-
   constructor(
     private readonly countriesApiService: CountriesAPIService,
     private readonly currencyService: CurrenciesService,
+    private readonly countriesRespository: CountriesRespository,
   ) {
     this.loadAllCountries();
   }
@@ -21,29 +20,18 @@ export class CountriesService {
         curr.exchangeRate = this.currencyService.findOne(curr.abbr);
       });
     });
-    this.countries.length = 0;
-    this.countries.push(...allCountries);
+    this.countriesRespository.setCountries(allCountries);
   }
 
   getAllCountries() {
-    return this.countries;
+    return this.countriesRespository.getAllCountries();
   }
 
   findByNameStart(name: string) {
-    const matching = this.countries
-      .filter((country) =>
-        (country.name.common as string)
-          .toLowerCase()
-          .startsWith(name.toLowerCase()),
-      )
-      .sort((a, b) => a.name.common.localeCompare(b.name.common));
-    return matching;
+    return this.countriesRespository.findByNameStart(name);
   }
 
-  findByCountryCode(countryCode: string) {
-    const matching = this.countries.find(
-      (country) => country.name.common === countryCode,
-    );
-    return matching;
+  findByCountryCommonName(countryCommonName: string) {
+    return this.countriesRespository.findByCountryCommonName(countryCommonName);
   }
 }
